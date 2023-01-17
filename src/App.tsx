@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.scss'
-import Header from "./components/Header/Header";
+import Filter from "./components/Header/Filter";
 import {useState, useEffect} from "react";
 import axios from "axios";
 import {NewsItemFace} from "./models";
 import NewsItem from "./components/NewsItem/NewsItem";
 import uuid from 'react-uuid';
 import Loading from "./components/Loading/Loading";
+import Header from "./components/Header/Header";
 
 function App() {
 
@@ -35,9 +36,10 @@ function App() {
 
     return (
         <div className='wrapper'>
-            <Header onChangeSearchVal={onChangeSearchVal} clearSearchVal={clearSearchVal} value={searchVal}/>
+            <Header/>
+            <Filter onChangeSearchVal={onChangeSearchVal} clearSearchVal={clearSearchVal} value={searchVal}/>
             <main>
-                <h1>{ searchVal ? `Search by words: ${searchVal}` : 'All news' }</h1>
+                <h2>{ searchVal ? `Search by words: ${searchVal}` : 'All news' }</h2>
                 <div>
                     <p>
                         Results: {api ?

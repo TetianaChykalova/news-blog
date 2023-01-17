@@ -4,6 +4,20 @@
   padding: 30px;
   border-radius: 20px;
 
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 200px;
+
+    img {
+      height: 100%;
+    }
+    h1 {
+      font-size: 125px;
+    }
+  }
+
   .filter {
   }
 
