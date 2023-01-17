@@ -1,0 +1,79 @@
+interface NState {
+    news: ApiData[],
+    loading:boolean,
+    errorMsg:string,
+}
+const [state, setState] = useState<NState>({
+    news:[] as ApiData[],
+    loading: false,
+    errorMsg: '',
+})
+
+
+export interface newsItem {
+  status: string;
+  totalResults: number;
+  articles?: (ArticlesEntity)[] | null;
+}
+export interface ArticlesEntity {
+  source: Source;
+  author?: string | null;
+  title: string;
+  description: string;
+  url: string;
+  urlToImage?: string | null;
+  publishedAt: string;
+  content: string;
+}
+export interface Source {
+  id?: string | null;
+  name: string;
+}
+
+
+
+const wordConsole = (word : string) => {
+    console.log(word)
+    return word
+}
+{{ api.length > 0 ? wordConsole('yes') : wordConsole('loading') }}
+
+
+interface Api {
+    newsItem: newsItemFace
+}
+
+// export interface newsItemFace {
+//     author?: string | null;
+//     title: string;
+//     description: string;
+//     url: string;
+//     urlToImage: string;
+//     publishedAt: string;
+//     content: string;
+//     children?: JSX.Element|JSX.Element[];
+// }
+
+
+export interface newsItemFace {
+    articles?: (ArticlesEntity)[] | null;
+    status?: string;
+    totalResults?: number;
+}
+export interface ArticlesEntity {
+
+    author?: string | null;
+    content: string;
+    description: string;
+    publishedAt: string;
+    source: Source;
+    title: string;
+    url: string;
+    urlToImage?: string | null;
+
+
+}
+export interface Source {
+    id?: string | null;
+    name: string;
+}

@@ -1,0 +1,62 @@
+    // const [err, setErr] = useState(null);
+    // const [isLoaded, setIsLoaded] = useState(false);
+    const [api, setApi] = useState<NewsItemFace[] | null>(null);
+
+    console.log(api)
+
+    useEffect(() => {
+        axios.get('https://api.spaceflightnewsapi.net/v3/articles')
+            .then(response => {
+                setApi(response.data)
+            })
+            // .then(
+            //     (response) => {
+            //         setIsLoaded(true);
+            //         setApi(response.data);
+            //     },
+            //     (error) => {
+            //         setIsLoaded(true);
+            //         setErr(error);
+            //     }
+            // )
+    },[])
+
+
+    console.log(api)
+
+    // if (err) {
+    //     console.log(err)
+    //     return err
+    // } else if (!isLoaded) {
+    //     return <div>Loading...</div>;
+    // } else {
+    //     return (
+    //         <div className='wrapper'>
+    //             <Header/>
+    //             <main>
+    //                 <div>
+    //                     <p>
+    //                         Results: {api ? <span>{api.length}</span> : <span>...</span>}
+    //                     </p>
+    //                 </div>
+    //                 {/*<NewsList apiData={api}/>*/}
+    //                 {api ? <NewsList apiData={api}/> : <div>Loading ...</div>}
+    //             </main>
+    //         </div>
+    //     );
+    // }
+
+    return (
+        <div className='wrapper'>
+            <Header/>
+            <main>
+                <div>
+                    <p>
+                        Results: {api ? <span>{api.length}</span> : <span>...</span>}
+                    </p>
+                </div>
+                {/*<NewsList apiData={api}/>*/}
+                {api ? <NewsList apiData={api}/> : <div>Loading ...</div>}
+            </main>
+        </div>
+    );
