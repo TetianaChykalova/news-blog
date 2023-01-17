@@ -1,28 +1,28 @@
 import React from 'react';
-import {NewsItemFace} from "../../models";
+import {ArticlesEntity} from "../../models";
 
 interface NewsItemProps {
-    news: NewsItemFace
+    news: ArticlesEntity
 }
 
 function NewsItem(props:NewsItemProps) {
-    console.log(props.news)
+    console.log(props)
     return (
         <div className="newsItem">
             <div>
-                <img src={props.news.imageUrl} alt="news"/>
+                <img src={props.news.urlToImage ? props.news.urlToImage : '/img/default.jpg'} alt="news"/>
             </div>
             <div>
                 <header>
                     <div>
                         <img src="/img/calendar.png" alt="icon"/>
-                        <span>{props.news.updatedAt}</span>
+                        <span>{props.news.publishedAt}</span>
                     </div>
-                    <div>{props.news.newsSite}</div>
+                    <div>{props.news.author}</div>
                 </header>
                 <div>
                     <h2>{props.news.title}</h2>
-                    <p>{props.news.summary}</p>
+                    <p>{props.news.description}</p>
                 </div>
                 <button>
                     <a href={props.news.url}>

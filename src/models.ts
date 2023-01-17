@@ -1,20 +1,24 @@
+import exp from "constants";
+
 export interface NewsItemFace {
-    id: number;
-    title: string;
-    url: string;
-    imageUrl: string;
-    newsSite: string;
-    summary: string;
-    publishedAt: string;
-    updatedAt: string;
-    // featured: boolean;
-    launches?: ({
-        id: string;
-        provider: string;
-    } | null)[] | null;
-    events?: (null)[] | null;
+    status: string;
+    totalResults: number;
+    articles: (ArticlesEntity)[];
 }
-// interface LaunchesEntity {
-//     id: string;
-//     provider: string;
-// }
+export interface ArticlesEntity {
+    source: Source;
+    author?: string;
+    title: string;
+    description: string;
+    url: string;
+    urlToImage?: string | null;
+    publishedAt: string;
+    content: string;
+}
+export interface Source {
+    id?: string | null;
+    name: string;
+}
+
+
+
