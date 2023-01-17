@@ -1,12 +1,15 @@
 import React from 'react';
 import {ArticlesEntity} from "../../models";
+import {Button} from "@mui/material";
+import PersonIcon from '@mui/icons-material/Person';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 interface NewsItemProps {
     news: ArticlesEntity
 }
 
 function NewsItem(props:NewsItemProps) {
-    console.log(props)
+    // console.log(props)
     return (
         <div className="newsItem">
             <div>
@@ -15,20 +18,20 @@ function NewsItem(props:NewsItemProps) {
             <div>
                 <header>
                     <div>
-                        <img src="/img/calendar.png" alt="icon"/>
-                        <span>{props.news.publishedAt}</span>
+                        <CalendarMonthIcon/>
+                        <span>{props.news.publishedAt.split('T')[0]}</span>
                     </div>
-                    <div>{props.news.author}</div>
+                    {props.news.author ? <div><PersonIcon/> {props.news.author}</div> : null}
                 </header>
                 <div>
                     <h2>{props.news.title}</h2>
                     <p>{props.news.description}</p>
                 </div>
-                <button>
+                <Button variant="outlined">
                     <a href={props.news.url}>
-                        Read more <span> <img src="/img/arrow-right.png" alt="icon"/> </span>
+                        read in original
                     </a>
-                </button>
+                </Button>
             </div>
         </div>
     );
