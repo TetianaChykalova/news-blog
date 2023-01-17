@@ -6,6 +6,7 @@ import axios from "axios";
 import {NewsItemFace} from "./models";
 import NewsItem from "./components/NewsItem/NewsItem";
 import uuid from 'react-uuid';
+import Loading from "./components/Loading/Loading";
 
 function App() {
 
@@ -55,9 +56,10 @@ function App() {
                     <>
                         {api ?
                             api.articles
-                                .filter(item => item.title.toLowerCase().includes(searchVal.toLowerCase().trim()) || item.description.toLowerCase().includes(searchVal.toLowerCase().trim()))
+                                .filter(item => item.title.toLowerCase().includes(searchVal.toLowerCase().trim())
+                                    || item.description.toLowerCase().includes(searchVal.toLowerCase().trim()))
                                 .map((news) => <NewsItem news={news} key={uuid()} />)
-                            : <p>Loading ...</p>}
+                            : <Loading/>}
                     </>
                 </div>
             </main>
