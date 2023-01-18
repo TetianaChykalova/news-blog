@@ -25,22 +25,21 @@ function App() {
 
     const [api, setApi] = useState<NewsItemFace | null>(null);
 
-    console.log(api)
-
     const options = {
         method: 'GET',
-        url: 'https://api.newscatcherapi.com/v2/latest_headlines?lang=en&topic=travel&page_size=100&',
+        url: 'https://api.newscatcherapi.com/v2/latest_headlines?lang=en&topic=travel&page_size=50&',
         headers: {
-            'x-api-key': 'JD-w3LX8QQbTc1jSCZgwt9nrHGiPlyJiQ2tByoo0ANU'
+            'x-api-key': 'GlTefXqb76NJpPIJ9yD_1g8T-QF9jMfxVvuAoi24rUs'
         }
     };
 
-    // useEffect(() => {
-    //     axios.request(options)
-    //         .then(response => {
-    //             setApi(response.data)
-    //         })
-    // })
+    useEffect(() => {
+        axios.request(options)
+            .then(response => {
+                setApi(response.data)
+            })
+    })
+
 
     console.log(api)
 

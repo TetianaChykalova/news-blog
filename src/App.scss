@@ -93,15 +93,19 @@ $second-color: #084d00;
       justify-content: space-between;
 
       .newsItem {
+        position: relative;
         flex: 0 1 30%;
         margin-bottom: 50px;
         height: 530px;
+        box-shadow: rgba(140, 140, 140, 0.61) 0 0 15px;
+
         transition: all 0.5s ease-out 0s;
 
         &:hover {
           background: $bg-color;
           transform: scale(1.03);
           transition: all 0.5s ease-out 0s;
+          box-shadow: #363636 0 0 15px;
         }
 
         > div:first-child {
@@ -126,6 +130,8 @@ $second-color: #084d00;
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
+            padding: 0 5px;
+
 
             div {
               display: flex;
@@ -139,6 +145,7 @@ $second-color: #084d00;
 
           .content {
             flex: 1 1 auto;
+            padding: 0 5px;
 
             h2 {
               font-weight: 400;
@@ -170,6 +177,8 @@ $second-color: #084d00;
           }
           }
 
+
+
         .modal {
           z-index: 3;
           position: absolute;
@@ -183,6 +192,10 @@ $second-color: #084d00;
 
           .content {
             background: #fff;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
 
             h2 {
               margin-bottom: 20px;
@@ -190,6 +203,8 @@ $second-color: #084d00;
 
             p {
               font-size: 16px;
+              flex: 1 1 auto;
+              overflow: auto;
             }
 
             button {
@@ -207,6 +222,9 @@ $second-color: #084d00;
     }
   }
 }
+
+
+
 
 
 @keyframes Loading-img-circle {
