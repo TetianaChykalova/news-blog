@@ -4,7 +4,7 @@ function Header(props:any) {
     return (
         <header className='header'>
             <img src="/img/logo.png" alt="logo"/>
-            <h1>News Blog</h1>
+            <h1>Travel News</h1>
         </header>
     );
 }

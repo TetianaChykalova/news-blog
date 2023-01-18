@@ -27,12 +27,25 @@ function App() {
 
     // console.log(api)
 
+    //      page_size
+    // :
+    // 50
+    const options = {
+        method: 'GET',
+        url: 'https://api.newscatcherapi.com/v2/latest_headlines?lang=en&topic=travel&page_size=100&',
+        headers: {
+            'x-api-key': 'JD-w3LX8QQbTc1jSCZgwt9nrHGiPlyJiQ2tByoo0ANU'
+        }
+    };
+
     useEffect(() => {
-        axios.get('https://newsapi.org/v2/everything?q=bitcoin&apiKey=d7291ad629d04856af10e4d7c30fc7f9')
+        axios.request(options)
             .then(response => {
                 setApi(response.data)
             })
     }, [])
+
+    console.log(api)
 
     return (
         <div className='wrapper'>
@@ -48,18 +61,19 @@ function App() {
                                 api.articles
                                     .filter(item => item.title.toLowerCase().includes(searchVal.toLowerCase().trim())).length +
                                 api.articles
-                                    .filter(item => item.description.toLowerCase().includes(searchVal.toLowerCase().trim())).length
+                                    .filter(item => item.excerpt.toLowerCase().includes(searchVal.toLowerCase().trim())).length
                                 : api.articles.length}
                         </span>
                         : <span>...</span>}
                     </p>
                 </div>
+
                 <div className="newsList">
                     <>
                         {api ?
                             api.articles
                                 .filter(item => item.title.toLowerCase().includes(searchVal.toLowerCase().trim())
-                                    || item.description.toLowerCase().includes(searchVal.toLowerCase().trim()))
+                                    || item.summary.toLowerCase().includes(searchVal.toLowerCase().trim()))
                                 .map((news) => <NewsItem news={news} key={uuid()} />)
                             : <Loading/>}
                     </>
