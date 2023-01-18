@@ -6,6 +6,12 @@ function Loading(props:any) {
                 <div className="element">
                     <img src="/img/loading.png" alt=""/>
                 </div>
+
+            <p>
+                Sorry :( <br/>
+                We have a problem... <br/>
+                Please, try again later
+            </p>
         </div>
     );
 }

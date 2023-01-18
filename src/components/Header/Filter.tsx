@@ -1,6 +1,7 @@
 import React from 'react';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import ArrowCircleDownOutlinedIcon from '@mui/icons-material/ArrowCircleDownOutlined';
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
+import Input from '@mui/material/Input';
 
 type FilterProps = {
     onChangeSearchVal(e: React.ChangeEvent<HTMLInputElement>): void;
@@ -11,10 +12,12 @@ type FilterProps = {
 function Filter(props:FilterProps) {
     return (
         <div className='filter'>
-            <p>Filter by keywords</p>
             <div>
-               <ManageSearchIcon/>
-                <input
+                <p>News search by keywords</p>
+                <ArrowCircleDownOutlinedIcon/>
+            </div>
+            <div>
+                <Input
                     type="text"
                     placeholder='Enter your search'
                     value={props.value}

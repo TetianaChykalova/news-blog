@@ -25,11 +25,8 @@ function App() {
 
     const [api, setApi] = useState<NewsItemFace | null>(null);
 
-    // console.log(api)
+    console.log(api)
 
-    //      page_size
-    // :
-    // 50
     const options = {
         method: 'GET',
         url: 'https://api.newscatcherapi.com/v2/latest_headlines?lang=en&topic=travel&page_size=100&',
@@ -38,12 +35,12 @@ function App() {
         }
     };
 
-    useEffect(() => {
-        axios.request(options)
-            .then(response => {
-                setApi(response.data)
-            })
-    }, [])
+    // useEffect(() => {
+    //     axios.request(options)
+    //         .then(response => {
+    //             setApi(response.data)
+    //         })
+    // })
 
     console.log(api)
 
@@ -52,17 +49,19 @@ function App() {
             <Header/>
             <Filter onChangeSearchVal={onChangeSearchVal} clearSearchVal={clearSearchVal} value={searchVal}/>
             <main>
-                <h2>{ searchVal ? `Search by words: ${searchVal}` : 'All news' }</h2>
-                <div>
+                <h2>{searchVal ? `Search by words: ${searchVal}` : 'All news'}</h2>
+                <div className='results'>
                     <p>
                         Results: {api ?
                         <span>
-                            {searchVal ?
-                                api.articles
-                                    .filter(item => item.title.toLowerCase().includes(searchVal.toLowerCase().trim())).length +
-                                api.articles
-                                    .filter(item => item.excerpt.toLowerCase().includes(searchVal.toLowerCase().trim())).length
-                                : api.articles.length}
+                            {
+                                searchVal ?
+                                    api.articles
+                                        .filter(item => item.title.toLowerCase().includes(searchVal.toLowerCase().trim())).length +
+                                    api.articles
+                                        .filter(item => item.summary.toLowerCase().includes(searchVal.toLowerCase().trim())).length
+                                    : api.articles.length
+                            }
                         </span>
                         : <span>...</span>}
                     </p>
@@ -70,12 +69,16 @@ function App() {
 
                 <div className="newsList">
                     <>
-                        {api ?
-                            api.articles
-                                .filter(item => item.title.toLowerCase().includes(searchVal.toLowerCase().trim())
-                                    || item.summary.toLowerCase().includes(searchVal.toLowerCase().trim()))
-                                .map((news) => <NewsItem news={news} key={uuid()} />)
-                            : <Loading/>}
+                        {
+                            api ?
+                                api.articles
+                                    .filter(
+                                        item => item.title.toLowerCase().includes(searchVal.toLowerCase().trim())
+                                            || item.summary.toLowerCase().includes(searchVal.toLowerCase().trim())
+                                    )
+                                    .map((news) => <NewsItem news={news} key={uuid()}/>)
+                                : <Loading/>
+                        }
                     </>
                 </div>
             </main>

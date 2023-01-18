@@ -1,3 +1,6 @@
+$bg-color: rgba(142, 206, 241, 0.25);
+$second-color: #084d00;
+
 .wrapper {
   background: #fff;
   margin: 50px;
@@ -5,40 +8,101 @@
   border-radius: 20px;
 
   .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 200px;
 
-    img {
-      height: 100%;
+    background: $bg-color;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 50px;
+
+    div:first-child {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 170px;
+
+      img {
+        height: 100%;
+      }
+      h1 {
+        font-size: 100px;
+        text-shadow: rgba(54, 54, 54, 0.76) 3px 3px 5px;
+      }
     }
-    h1 {
-      font-size: 125px;
+
+    div:last-child {
+      text-align: center;
+      font-size: 56px;
+      color: $second-color;
     }
   }
 
   .filter {
+    margin-bottom: 30px;
+
+    >div:first-child {
+      display: flex;
+      align-items: center;
+
+      margin-bottom: 10px;
+
+      p {
+        font-size: 24px;
+        margin-right: 15px;
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    >div:last-child {
+      button {
+        background: #fff;
+        svg {
+          width: 24px;
+          height: 24px;
+          transform: translateY(5px);
+        }
+      }
+    }
   }
 
   main {
-    > div:first-child {
+
+    h2 {
+      margin-bottom: 10px;
+      font-size: 32px;
+      text-shadow: rgba(54, 54, 54, 0.49) 1px 3px 3px;
+    }
+
+    .results {
       border-bottom: 1px solid #949494;
       margin-bottom: 40px;
+      padding-bottom: 5px;
+
+      p {
+        font-size: 18px;
+        text-align: right;
+      }
     }
 
     .newsList {
       display: flex;
       flex-wrap: wrap;
-      margin: 0 -30px;
+      justify-content: space-between;
 
       .newsItem {
-        padding: 0 30px;
-        flex: 0 1 33.333%;
-
+        flex: 0 1 30%;
         margin-bottom: 50px;
-
         height: 530px;
+        transition: all 0.5s ease-out 0s;
+
+        &:hover {
+          background: $bg-color;
+          transform: scale(1.03);
+          transition: all 0.5s ease-out 0s;
+        }
 
         > div:first-child {
           width: 100%;
@@ -63,8 +127,13 @@
             justify-content: space-between;
             margin-bottom: 20px;
 
-            div:first-child {
+            div {
               display: flex;
+              align-items: center;
+
+              svg {
+                margin-right: 5px;
+              }
             }
           }
 
@@ -92,10 +161,12 @@
             font-size: 16px;
             line-height: 150%;
             color: #363636;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
           }
           button:last-child {
             margin-bottom: 0;
+            background: $second-color;
+            color: #fff;
           }
           }
 
@@ -107,11 +178,27 @@
           width: 100%;
           height: 100%;
           background: rgba(0, 0, 0, 0.7);
-          color: white;
           overflow: auto;
+          padding: 10px;
 
-          h2 {
-            margin-bottom: 20px;
+          .content {
+            background: #fff;
+
+            h2 {
+              margin-bottom: 20px;
+            }
+
+            p {
+              font-size: 16px;
+            }
+
+            button {
+              background: $second-color;
+              font-weight: 700;
+              font-size: 16px;
+              line-height: 150%;
+              color: #fff;
+            }
           }
         }
 
@@ -122,7 +209,7 @@
 }
 
 
-@keyframes Loading-circle {
+@keyframes Loading-img-circle {
   0% {
     rotate: 0;
   }
@@ -131,6 +218,30 @@
   }
   100% {
     rotate: 360deg;
+  }
+}
+
+@keyframes Loading-img-opacity {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes Loading-text {
+  0% {
+    opacity: 0;
+  }
+  85% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -156,9 +267,16 @@
         height: 100%;
         object-fit: cover;
 
-        animation-name: Loading-circle;
-        animation-duration: 2.2s;
-        animation-iteration-count: infinite;
+        animation: Loading-img-circle 2.3s 3 forwards, Loading-img-opacity 5s linear 1 forwards;
       }
+  }
+
+  p {
+    font-size: 28px;
+    line-height: 130%;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    animation: Loading-text 5s linear 1 forwards;
   }
 }

@@ -3,12 +3,14 @@ import {ArticlesEntity} from "../../models";
 import {Button} from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 
 interface NewsItemProps {
-    news: ArticlesEntity
+    news: ArticlesEntity,
+    key: string
 }
 
-function NewsItem(props:NewsItemProps) {
+function NewsItem(props: NewsItemProps) {
 
     const [modal, setModal] = useState(false)
 
@@ -30,31 +32,33 @@ function NewsItem(props:NewsItemProps) {
             <div>
                 <header>
                     {<div><CalendarMonthIcon/> {props.news.published_date.split(' ')[0]}</div>}
-                    {props.news.author.length>0 && <div><PersonIcon/> {props.news.author}</div>}
-                    {<div><CalendarMonthIcon/> {props.news.country}</div>}
+                    {props.news.authors.length > 0 && <div><PersonIcon/> {props.news.authors}</div>}
+                    {props.news.country !== 'unknown' && <div><LanguageOutlinedIcon/> {props.news.country}</div>}
                 </header>
                 <div className='content'>
                     <h2>{`${props.news.title.substring(0, 100)}...`}</h2>
-                    <p>{props.news.summary.substring(0, 100)}</p>
+                    <p>{`${props.news.summary.substring(0, 150)}...`}</p>
                 </div>
                 <Button variant="outlined">
-                    <a target='_blank' href={props.news.link}>
+                    <a target='_blank' rel='noreferrer' href={props.news.link}>
                         read full in original
                     </a>
                 </Button>
-                    <Button variant="contained" onClick={openModal}>
+                <Button variant="contained" onClick={openModal}>
                     read details here
-                    </Button>
+                </Button>
             </div>
             {
                 modal &&
                 <div className="modal">
-                    <h2>{props.news.title}</h2>
-                    <p>{props.news.summary}</p>
+                    <div className='content'>
+                        <h2>{props.news.title}</h2>
+                        <p>{props.news.summary}</p>
 
-                    <Button variant="contained" onClick={closeModal}>
-                        Back to all news
-                    </Button>
+                        <Button variant="contained" onClick={closeModal}>
+                            Back
+                        </Button>
+                    </div>
                 </div>
             }
         </div>
