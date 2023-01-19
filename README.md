@@ -1,46 +1,70 @@
-# Getting Started with Create React App
+# Travel News Blog
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About app
 
-## Available Scripts
+This App does API-request (get) to the news website. It written with react and typescript.
+This app uses the following third-party libraries These dependencies are written in the package.json file
 
-In the project directory, you can run:
+    "axios": "^1.2.2",
+    "node-sass": "^4.14.1",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.4",
+    "react-uuid": "^2.0.0",
+    
+During my acquaintance with React some time ago, I encountered a problem - the API request worked only locally. Therefore, I checked the correctness of the logic through Docker from the very beginning.
 
-### `npm start`
+I wasn't looking for a perfect design. The main thing was to reproduce the logic of the application
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## About build and deploy
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Link to the done website
+https://travel-news-blog.tetiana-chykalova.click
 
-### `npm test`
+##### If you need to work with the code, write npm install in your terminal, then all the necessary dependencies will be added for you locally
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    npm install
 
-### `npm run build`
+All form fields are mandatory. The fields for entering the phone number and email have additional validation. I would really like to add validation to the field for entering the date of birth, but unfortunately, it is not there yet
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### The application is hosted using Docker, Nginx, and AWS EC2, ECR, Route53. Security certificate added using Certbot.
+##### If it is necessary to update the application, stop the "daemon" and perform the following actions:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Build a new static file using the docker build
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    docker build -t <<tag>> .
+    
+Push a local Docker representation using the docker push
 
-### `npm run eject`
+    docker push <<tag>>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+##### Next, use the key to go to the service and execute the following commands on behalf of the root
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Download the latest version of the application using the docker pull
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    sudo docker pull <<tag>>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Run the new version as a "daemon" (in the example, the port used during the first setup is specified)
 
-## Learn More
+    sudo docker run -d -p <<port>> <<tag>>
+    
+## App problems
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Unfortunately, I did not manage to highlight search words in yellow. But I am sure that I will be able to find a solution to this problem.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Also, I have a problem with API.
+The site that issues the key has a limit on the number of requests. Please, if your API call doesn't work, email me so I can create a new key, or create your own for this code in a file src/App.tsx:
+
+```
+const options = {
+        method: 'GET',
+        url: 'https://api.newscatcherapi.com/v2/latest_headlines?lang=en&topic=travel&page_size=50&',
+        headers: {
+            'x-api-key': 'GlTefXqb76NJpPIJ9yD_1g8T-QF9jMfxVvuAoi24rUs'
+        }
+    };
+```
+https://newscatcherapi.com/
+
+## About candidate
+### You can find out more about the candidate's experience and skills at the link
+https://tetiana-chykalova.click/
